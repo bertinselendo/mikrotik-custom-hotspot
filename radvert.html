@@ -1,40 +1,75 @@
-<html>
-<head>
-<meta http-equiv="refresh" content="2; url=$(link-orig)">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<title>Internet hotspot - Advertisement</title>
-<link rel="stylesheet" href="css/style.css">
-<script>
-
-    var popup = '';
-    function openOrig() {
-	if (window.focus) popup.focus();
-	location.href = unescape('$(link-orig-esc)');
-    }
-    function openAd() {
-	location.href = unescape('$(link-redirect-esc)');
-    }
-    function openAdvert() {
-	if (window.name != 'hotspot_advert') {
-		popup = open('$(link-redirect)', 'hotspot_advert', '');
-		setTimeout("openOrig()", 1000);
-		return;
-	}
-	setTimeout("openAd()", 1000);
-    }
-</script>
-</head>
-<body onLoad="openAdvert()">
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Advertisement</h1>
-                <p class="info">If nothing happens, open <a href="$(link-redirect)" target="hotspot_advert">advertisement</a> manually.</p>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="2; url=$(link-orig)">
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Publicité - VORB</title>
+    <script>
+      var popup = '';
+      function openOrig() {
+        if (window.focus) popup.focus();
+        location.href = unescape('$(link-orig-esc)');
+      }
+      function openAd() {
+        location.href = unescape('$(link-redirect-esc)');
+      }
+      function openAdvert() {
+        if (window.name != 'hotspot_advert') {
+          popup = open('$(link-redirect)', 'hotspot_advert', '');
+          setTimeout("openOrig()", 1000);
+          return;
+        }
+        setTimeout("openAd()", 1000);
+      }
+    </script>
+  </head>
+  <body
+    class="min-h-screen flex flex-col items-center justify-center relative"
+    style="
+      background-image: url('./bg-02.webp');
+      background-size: cover;
+      background-position: center;
+    "
+    onload="openAdvert()"
+  >
+    <!-- Netflix-style background overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/70 to-black/90 z-0"
+    ></div>
+    <!-- Main content -->
+    <div class="relative z-10 w-full max-w-10/12 md:max-w-sm mx-auto">
+      <div class="flex flex-col items-center">
+        <!-- Netflix-style logo -->
+        <div
+          class="text-white flex flex-col justify-end items-end leading-8 mb-8"
+        >
+          <p class="text-[58px] font-bold">VORB</p>
+          <p class="mr-1">ZONE</p>
         </div>
+        <div
+          class="bg-black/70 rounded-md px-8 py-10 w-full shadow-lg flex flex-col gap-4 text-center"
+        >
+          <h2 class="text-2xl font-bold text-white mb-4">
+            Publicité
+          </h2>
+          <p class="text-sm text-white/90 mb-4">
+            Si rien ne se passe, ouvrez <a href="$(link-redirect)" target="hotspot_advert" class="underline text-blue-400 hover:text-blue-200">la publicité</a> manuellement.
+          </p>
+          <div class="flex justify-center">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+          </div>
+          <p class="text-xs text-zinc-400 mt-4">
+            Redirection automatique dans quelques secondes...
+          </p>
+        </div>
+        <p class="text-zinc-500 text-xs mt-8 text-center">
+          Powered by Bertin Sellendo
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

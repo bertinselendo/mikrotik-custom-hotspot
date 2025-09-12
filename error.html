@@ -1,23 +1,56 @@
-<html>
-
-<head>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="-1">
-    <title>Internet hotspot - Error</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Hotspot error: $(error)</h1>
-                <p class="info">Log in page: <a href="$(link-login)">$(link-login)</a></p>
-            </div>
+    <link href="./output.css" rel="stylesheet" />
+    <title>Erreur - VORB</title>
+  </head>
+  <body
+    class="min-h-screen flex flex-col items-center justify-center relative"
+    style="
+      background-image: url('./bg-02.webp');
+      background-size: cover;
+      background-position: center;
+    "
+  >
+    <!-- Netflix-style background overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/70 to-black/90 z-0"
+    ></div>
+    <!-- Main content -->
+    <div class="relative z-10 w-full max-w-10/12 md:max-w-sm mx-auto">
+      <div class="flex flex-col items-center">
+        <!-- Netflix-style logo -->
+        <div
+          class="text-white flex flex-col justify-end items-end leading-8 mb-2"
+        >
+          <p class="text-[58px] font-bold">VORB</p>
+          <p class="mr-1">ZONE</p>
         </div>
+        <div
+          class="bg-black/70 rounded-md px-8 py-10 w-full shadow-lg flex flex-col gap-4"
+        >
+          <div class="text-center">
+            <h1 class="text-2xl font-bold text-white mb-4">Erreur Hotspot</h1>
+            <p class="text-red-400 text-lg mb-4">$(error)</p>
+            <p class="text-sm text-white/90 mb-6">
+              Une erreur s'est produite lors de votre connexion au hotspot.
+            </p>
+            <a
+              href="$(link-login)"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer px-6 py-2 rounded transition-colors duration-200"
+            >
+              Retour à la connexion
+            </a>
+          </div>
+        </div>
+        <p class="text-zinc-500 text-xs mt-8 text-center">
+          Powered by Bertin Sellendo
+        </p>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

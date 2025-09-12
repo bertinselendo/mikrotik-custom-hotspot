@@ -5,18 +5,22 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Internet hotspot - Log in</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Connexion - VORB</title>
   </head>
-
-  <body>
-    <!-- two other colors
-
-<body class="lite">
-<body class="dark">
-
--->
-
+  <body
+    class="min-h-screen flex flex-col items-center justify-center relative"
+    style="
+      background-image: url('./bg-02.webp');
+      background-size: cover;
+      background-position: center;
+    "
+  >
+    <!-- Netflix-style background overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/70 to-black/90 z-0"
+    ></div>
+    <!-- Hidden form for CHAP authentication -->
     $(if chap-id)
     <form
       name="sendin"
@@ -26,12 +30,13 @@
     >
       <input type="hidden" name="username" />
       <input type="hidden" name="password" />
-      <input type="hidden" name="dst" value="$(link-orig)" />
+      <!-- <input type="hidden" name="dst" value="$(link-orig)" /> -->
+      <input type="hidden" name="dst" value="https://google.com" />
       <input type="hidden" name="popup" value="true" />
     </form>
-
     <script src="/md5.js"></script>
     <script>
+      // Handle CHAP login securely
       function doLogin() {
         document.sendin.username.value = document.login.username.value;
         document.sendin.password.value = hexMD5(
@@ -42,69 +47,99 @@
       }
     </script>
     $(endif)
-    <div class="ie-fixMinHeight">
-      <div class="main">
-        <div class="wrap animated fadeIn">
-          <form
-            name="login"
-            action="$(link-login-only)"
-            method="post"
-            $(if
-            chap-id)
-            onSubmit="return doLogin()"
-            $(endif)
-          >
-            <input type="hidden" name="dst" value="$(link-orig)" />
-            <input type="hidden" name="popup" value="true" />
-            <svg
-              class="logo"
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 174 42"
-            >
-              <path
-                fill="#fff"
-                d="M7.32 13.66L0 41.74 3.12 41.74 9.49 15.94 9.58 15.94 15.01 41.74 18.22 41.74 36.86 16.34 36.95 16.34 30.02 41.74 33.18 41.74 40.4 13.66 35.73 13.66 17.23 38.87 11.99 13.66 7.32 13.66zM43.43 21.45L38.19 41.74 41.16 41.74 46.4 21.45 43.43 21.45zM50.68 21.45L45.5 41.74 48.47 41.74 50.36 34.39 55.55 30.77 62.02 41.74 65.27 41.74 57.91 29.28 69.43 21.45 65.46 21.45 51.21 31.36 51.12 31.28 53.66 21.45 50.68 21.45z"
-              />
-              <path
-                d="M71.18 21.45L65.94 41.74h3l2.74-10.62c1-3.81 3.82-7.39 9.16-7.47.56 0 1.13 0 1.7 0l.66-2.48c-.52 0-1.09 0-1.61 0-4.34 0-6.94 2-8.82 5h-.1l1.23-4.68zM103.8 28.8c0-5-4-7.94-9.63-7.94-8.69 0-13.59 6.37-13.59 13 0 5.07 3.44 8.45 9.72 8.45 9 0 13.5-6.68 13.5-13.53m-3 .52c0 4.72-3.44 10.93-9.95 10.93-5 0-7.32-2.68-7.32-6.61 0-4.76 3.59-10.7 10.1-10.7 4.77 0 7.17 2.6 7.17 6.38M132.33 21.43L134.26 13.66 105.19 13.66 103.27 21.45 112.59 21.45 112.59 21.45 122.99 21.45 122.99 21.45 132.33 21.43zM111.67 25.17L107.55 41.74 117.93 41.74 122.06 25.17 122.06 25.16 111.67 25.16 111.67 25.17zM134 25.17l-4.11 16.57h9.35l4.1-16.57zm10.28-3.73l1.94-7.78h-9.34l-2 7.79zM150.09 13.66L143.11 41.74 152.45 41.74 153.91 35.92 156.04 34.34 159.34 41.74 169.49 41.74 163.26 29.55 174.26 21.33 163.07 21.33 156.18 27.3 156.09 27.3 159.44 13.66 150.09 13.66zM47.45 0c1.14 7.93 5.39 12.74 14.07 13.14A10.69 10.69 0 0 1 47.45 0"
-                fill="#fff"
-                fill-rule="evenodd"
-              />
-              <path
-                d="M42.91,1.4c.1,0,.11,0,.12.11A16.55,16.55,0,0,0,48.26,13a16.6,16.6,0,0,0,12,4.66c-10,4-20.55-5.6-17.33-16.28"
-                fill="#fff"
-                fill-rule="evenodd"
-              />
-            </svg>
+    <!-- Main content -->
+    <div class="relative z-10 w-full max-w-10/12 md:max-w-sm mx-auto">
+      <div class="flex flex-col items-center">
+        <!-- Netflix-style logo -->
+        <div
+          class="text-white flex flex-col justify-end items-end leading-8 mb-2"
+        >
+          <p class="text-[58px] font-bold">VORB</p>
+          <p class="mr-1">ZONE</p>
+        </div>
+        <form
+          name="login"
+          action="$(link-login-only)"
+          method="post"
+          class="bg-black/70 rounded-md px-8 py-10 w-full shadow-lg flex flex-col gap-4"
+          $(if chap-id)
+          onSubmit="return doLogin()"
+          $(endif)
+        >
+          <input type="hidden" name="dst" value="$(link-orig)" />
+          <input type="hidden" name="popup" value="true" />
+          <h2 class="text-2xl font-bold text-white mb-2 text-center hidden">
+            Identifiez-vous
+          </h2>
 
-            <p class="info $(if error)alert$(endif)">
-              $(if error == "")Please log in to use the internet hotspot service
-              $(if trial == 'yes')<br />Free trial available,
+          <div class="space-y-1">
+            $(if error == "")
+            <p class="text-sm text-center text-white/90">
+              Entrer votre code pour utiliser la connexion $(if trial == 'yes')<br />
               <a
                 href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)"
-                >click here</a
-              >.$(endif) $(endif) $(if error)$(error)$(endif)
+                class="underline text-blue-400 hover:text-blue-200"
+                >Essayer gratuitement</a
+              >.$(endif)
             </p>
-            <label>
-              <img class="ico" src="img/user.svg" alt="#" />
+            $(endif) $(if error)
+            <p class="text-sm text-center text-red-500">$(error)</p>
+            $(endif)
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <input
+              name="username"
+              type="text"
+              value="$(username)"
+              placeholder="code"
+              class="outline-none border border-[#606060] p-3 text-white w-full placeholder-zinc-400 focus-within:border-red-600 ring-red-600 rounded"
+            />
+            <!-- Show a checkbox to reveal the password field -->
+            <div><div class="flex items-center gap-2 mb-2">
               <input
-                name="username"
-                type="text"
-                value="$(username)"
-                placeholder="Username"
+                id="has-password"
+                type="checkbox"
+                class="accent-red-600 w-3 h-3"
+                onclick="document.getElementById('password-field').style.display = this.checked ? 'block' : 'none'"
               />
-            </label>
-
-            <label>
-              <img class="ico" src="img/password.svg" alt="#" />
-              <input name="password" type="password" placeholder="Password" />
-            </label>
-
-            <input type="submit" value="Connect" />
-          </form>
-          <p class="info bt">Powered by MikroTik RouterOS</p>
-        </div>
+              <label for="has-password" class="text-white text-xs cursor-pointer select-none">
+                J'ai un mot de passe
+              </label>
+            </div>
+            <input
+              id="password-field"
+              name="password"
+              type="password"
+              placeholder="mot de passe"
+              style="display: none"
+              class="outline-none border border-[#606060] p-3 text-white w-full placeholder-zinc-400 focus-within:border-red-600 ring-red-600 rounded"
+            /></div>
+          </div>
+          <button
+            type="submit"
+            class="mt-0 bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer p-3 rounded transition-colors duration-200"
+          >
+            Se connecter
+          </button>
+          <div class="flex flex-col justify-between items-center mt-2 gap-4 text-xs">
+            <a
+              href="tel:+243821387202"
+              class="text-zinc-300 hover:underline flex gap-1"
+            >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+              Besoin d'aide ?
+            </a>
+            <div class="flex items-center text-white/80">
+              Vous acceptez les Conditions d'utilisation
+            </div>
+          </div>
+        </form>
+        <p class="text-zinc-500 text-xs mt-8 text-center">
+          Powered by Bertin Sellendo
+        </p>
       </div>
     </div>
   </body>
