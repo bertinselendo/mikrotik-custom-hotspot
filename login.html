@@ -9,7 +9,7 @@
     <title>Connexion - VORB</title>
   </head>
   <body
-    class="min-h-screen flex flex-col items-center justify-center relative text-white"
+    class="min-h-svh flex flex-col items-center justify-center relative text-white"
     style="
       background-image: url('./img/bg-02.webp');
       background-size: cover;
@@ -31,7 +31,7 @@
       <input type="hidden" name="username" />
       <input type="hidden" name="password" />
       <!-- <input type="hidden" name="dst" value="$(link-orig)" /> -->
-      <input type="hidden" name="dst" value="https://google.com" />
+      <input type="hidden" name="dst" value="http://vorb.zone/start.html" />
       <input type="hidden" name="popup" value="true" />
     </form>
     <script src="/md5.js"></script>
@@ -83,7 +83,7 @@
               >.$(endif)
             </p>
             $(endif) $(if error)
-            <p class="text-sm text-center text-red-500">$(error)</p>
+            <p id="errormsg" class="text-sm text-center text-red-500">$(error)</p>
             $(endif)
           </div>
 
@@ -142,5 +142,19 @@
         </p>
       </div>
     </div>
+    <script>
+      // Get the error message and decode HTML entities for proper character rendering
+      const e = document.createElement('textarea');
+      e.innerHTML = "$(error)";
+      const errorMsg = e.value;
+      const errorMsgParsed = e.value.trim().toLowerCase();
+      const customErrors = {
+        "username doesn't exist: $(username)": "$(username) n'existe pas",
+        "transfer limit reached": "Vous avez atteint la limite de transfert",
+        "download limit reached": "Vous avez atteint la limite de téléchargement",
+        "uptime limit reached": "Vous avez atteint la limite de temps de connexion",
+      };
+      document.getElementById("errormsg").innerText = customErrors[errorMsgParsed] || errorMsg;
+    </script>
   </body>
 </html>

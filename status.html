@@ -30,7 +30,7 @@
     </script>
   </head>
   <body
-    class="min-h-screen flex flex-col items-center justify-center relative"
+    class="min-h-svh flex flex-col items-center justify-center relative text-black"
     style="
       background-image: url('./img/bg-02.webp');
       background-size: cover;
@@ -40,7 +40,7 @@
   >
     <!-- Netflix-style background overlay -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/70 to-black/90 z-0"
+      class="absolute inset-0 bg-gradient-to-b from-white via-zinc-100/70 to-white/90 z-0"
     ></div>
 
     <!-- Main content -->
@@ -48,71 +48,79 @@
       <div class="flex flex-col items-center">
         <!-- Netflix-style logo -->
         <div
-          class="text-white flex flex-col justify-end items-end leading-8 mb-8"
+          class="text-red-600 flex flex-col justify-end items-end leading-8 mb-2"
         >
           <p class="text-[58px] font-bold">VORB</p>
           <p class="mr-1">ZONE</p>
         </div>
 
-        <div class="bg-black/70 rounded-md px-8 py-8 w-full shadow-lg flex flex-col gap-4">
+        <div class="bg-white/70 rounded-md px-8 py-8 w-full shadow-lg flex flex-col gap-4">
           $(if login-by == 'trial')
-              <h1 class="text-2xl font-bold text-white mb-4 text-center">Hi, trial user!</h1>
+              <h1 class="text-2xl font-bold text-black mb-4 text-center">Hi, trial user!</h1>
           $(elif login-by != 'mac')
-              <h1 class="text-2xl font-bold text-white mb-4 text-center">Hi, $(username)!</h1>
+              <h1 class="text-2xl font-bold text-black mb-4 text-center">$(username)</h1>
           $(endif)
 
           <form action="$(link-logout)" name="logout" onSubmit="return openLogout()" class="flex flex-col gap-2">
-              <div class="space-y-1 text-sm">
-                  <div class="flex justify-between text-white/90">
-                      <span>IP address:</span>
-                      <span class="text-white font-medium">$(ip)</span>
-                  </div>
-                  <div class="flex justify-between text-white/90">
-                      <span>Bytes up / down:</span>
-                      <span class="text-white font-medium">$(bytes-in-nice) / $(bytes-out-nice)</span>
-                  </div>
-                  $(if session-time-left)
-                      <div class="flex justify-between text-white/90">
-                          <span>Connected / left:</span>
-                          <span class="text-white font-medium">$(uptime) / $(session-time-left)</span>
-                      </div>
-                  $(else)
-                      <div class="flex justify-between text-white/90">
-                          <span>Connected:</span>
-                          <span class="text-white font-medium">$(uptime)</span>
-                      </div>
-                  $(endif)
-                  $(if blocked == 'yes')
-                      <div class="flex justify-between text-white/90">
-                          <span>Status:</span>
-                          <a href="$(link-advert)" target="hotspot_advert" class="text-blue-400 hover:text-blue-200 underline">Advertisement required</a>
-                      </div>
-                  $(elif refresh-timeout)
-                      <div class="flex justify-between text-white/90">
-                          <span>Status refresh:</span>
-                          <span class="text-white font-medium">$(refresh-timeout)</span>
-                      </div>
-                  $(endif)
+            <div class="bg-white rounded p-3 space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-zinc-500">Adresse IP:</span>
+                <span class="font-medium">$(ip)</span>
+              </div>
+              
+              <div class="flex justify-between">
+                <span class="text-zinc-500">Adresse MAC:</span>
+                <span class="font-medium">$(mac)</span>
               </div>
 
-              $(if login-by-mac != 'yes')
-              <div class="flex flex-col gap-3 mt-4">
-                  <!-- user manager link. if user manager resides on other router, replace $(hostname) by its address -->
-                  <button
-                      onclick="document.location='http://$(hostname)/user?subs='; return false;"
-                      class="bg-zinc-600 hover:bg-zinc-700 text-white text-sm cursor-pointer p-3 rounded transition-colors duration-200"
-                  >
-                      Gérer le compte
-                  </button>
-                  <!-- end of user manager link -->
-                  <button
-                      type="submit"
-                      class="bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer p-3 rounded transition-colors duration-200"
-                  >
-                      Se déconnecter
-                  </button>
+              <div class="flex justify-between">
+                <span class="text-zinc-500">Temps de session:</span>
+                <span class="font-medium">$(uptime)</span>
               </div>
+
+              $(if session-time-left)
+                <div class="flex justify-between">
+                  <span class="text-zinc-500">Temps restant:</span>
+                  <span class="font-medium">$(session-time-left)</span>
+                </div>
               $(endif)
+
+              <div class="flex justify-between">
+                <span class="text-zinc-500">Données:</span>
+                <span class="font-medium">$(bytes-in-nice) ↓ / $(bytes-out-nice) ↑</span>
+              </div>
+
+              $(if blocked == 'yes')
+                <div class="flex justify-between">
+                  <span class="text-zinc-500">Statut:</span>
+                  <a href="$(link-advert)" target="hotspot_advert" class="text-blue-400 hover:text-blue-200 underline">Advertisement required</a>
+                </div>
+              $(elif refresh-timeout)
+                <div class="flex justify-between">
+                  <span class="text-zinc-500">Actualiser:</span>
+                  <span class="font-medium">$(refresh-timeout)</span>
+                </div>
+              $(endif)
+            </div>
+
+            $(if login-by-mac != 'yes')
+            <div class="flex flex-col gap-3 mt-4">
+              <!-- user manager link. if user manager resides on other router, replace $(hostname) by its address -->
+              <button
+                  onclick="document.location='http://vorb.one/um'; return false;"
+                  class="bg-zinc-800 hover:bg-zinc-900 text-white text-sm cursor-pointer p-3 rounded transition-colors duration-200"
+              >
+                  Gérer le compte
+              </button>
+              <!-- end of user manager link -->
+              <button
+                  type="submit"
+                  class="bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer p-3 rounded transition-colors duration-200"
+              >
+                  Se déconnecter
+              </button>
+            </div>
+            $(endif)
           </form>
         </div>
 
